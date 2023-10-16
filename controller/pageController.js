@@ -6,13 +6,9 @@ exports.getAboutPage = (req, res) => {
     res.render('about');
 };
 
-exports.getServicePage = (req, res) => {
-    res.render('service');
-};
-
-exports.getNewsPage = (req, res) => {
-    res.render('news');
-};
+exports.getTrainerPage = (req, res) => {
+    res.render('trainer');
+}
 
 exports.getGalleryPage = (req, res) => {
     res.render('gallery');
