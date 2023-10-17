@@ -1,11 +1,16 @@
 // MODULES
 const express = require('express');
+
+// MIDDLEWARE MODULES
 const cors = require('cors');
 const methodOverride = require('method-override');
+const session = require('express-session');
 const bodyParser = require('body-parser');
-const errorHandler = require('./middlewares/errorHandler');
 
+// DB
 const db = require('./models');
+
+// ROUTE MODULES
 const pageRoute = require('./routes/pageRoute');
 const userRoute = require('./routes/userRoute');
 
@@ -20,10 +25,24 @@ app.use(cors())
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(
+    session({
+    secret: 'my_keyboard_cat',
+    cookie: { maxAge: 30000 } ,
+    resave: false,
+    saveUninitialized: true,
+    })
+);
 app.use(methodOverride('_method'));
-app.use(errorHandler);
+
+// Global Variable
+global.userIN = null;
 
 // ROUTES
+app.use('*', (req, res, next) => {
+    userIN = req.session.userID;
+    next();
+});
 app.use('/', pageRoute);
 app.use('/users', userRoute);
 

@@ -1,8 +1,10 @@
+const useBcrypt = require('sequelize-bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define("User", {
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         surname: {
             type: DataTypes.STRING,
@@ -10,16 +12,23 @@ module.exports = (sequelize, DataTypes) => {
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true,
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         title: {
             type: DataTypes.STRING,
             allowNull: false
         },
-    })
+    });
+    useBcrypt(User, {
+        field: 'password',
+        rounds: 12,
+        compare: 'authenticate',
+      });
+
     return User;
 }
