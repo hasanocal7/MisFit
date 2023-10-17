@@ -1,10 +1,11 @@
 <%- include('partials/_header') %>
 <%- include('partials/_navigation') %>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="Profile-Card">
-                Hi <%= user.name %> <%= user.surname %>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <% if(user.title == 'Trainer') { %>
+                    <div>Hi Trainer <%= user.name %> <%= user.surname %></div>
+                <% } %>
             </div>
         </div>
     </div>

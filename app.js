@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const store = new session.MemoryStore();
 const bodyParser = require('body-parser');
 
 // DB
@@ -28,9 +29,9 @@ app.use(bodyParser.json());
 app.use(
     session({
     secret: 'my_keyboard_cat',
-    cookie: { maxAge: 30000 } ,
     resave: false,
     saveUninitialized: true,
+    store
     })
 );
 app.use(methodOverride('_method'));

@@ -33,18 +33,16 @@ exports.loginUser = async (req, res) => {
   }
 }
 
-exports.logoutUser = () => {
+exports.logoutUser = (req, res) => {
   req.session.destroy(() => {
     res.redirect('/');
   });
 }
 
 exports.getDashboardPage = async (req, res) => {
-  const user = await User.findOne({ id:req.session.userID})
-  const users = await User.find();
+  const user = await User.findOne({where: { id: req.session.userID }})
   res.status(200).render('dashboard', {
     page_name: 'dashboard',
     user,
-    users
   });
 }
