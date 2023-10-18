@@ -17,41 +17,90 @@
                 </div>
             </div>
                 <!-- Add Training Modal -->
-                <div class="modal fade" id="addTraining" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle">Add Training Page</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <form action="/trainings" method="POST" class="main_form">
-                            <div class="row">
-                                <div class="col-md-12 ">
-                                   <input class="contactus" placeholder="Training Name" type="type" name="name"> 
-                                </div>
-                                <div class="col-md-12">
-                                   <input class="contactus" value="<%= user.name %> <%= user.surname %>" type="text" name="trainer"> 
-                                </div>
-                                <div class="col-md-12">
-                                   <button class="send_btn">Add</button>
-                                </div>
-                             </div>
-                          </form>
+                <% if(trainings.length < 3 ) { %>
+                    <div class="modal fade" id="addTraining" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Add Training Page</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form action="/trainings" method="POST" class="main_form" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                       <input class="contactus" placeholder="Training Name" type="type" name="name"> 
+                                    </div>
+                                    <div class="col-md-12">
+                                       <input class="contactus" value="<%= user.name %> <%= user.surname %>" type="text" name="trainer"> 
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input class="contactus" type="file" name="image" required> 
+                                     </div>
+                                    <div class="col-md-12">
+                                       <button class="send_btn">Add</button>
+                                    </div>
+                                 </div>
+                              </form>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                <% } else { %>
+                    <div class="modal fade" id="addTraining" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Add Training Page</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger" role="alert">
+                                    Kayıt Sınırını Aştın
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                <% } %>
             </div>
         </div>
+        <div  class="trainers">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="titlepage">
+                        <p>Lorem Ipsum available, but the majority have suffered </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                <% for(let i=0; i < trainings.length ; i++) { %>
+                    <div class="col-md-4">
+                        <div id="trai" class="trainer_box">
+                           <div class="trainer_img">
+                              <figure><img src="<%= trainings[i].image %>" alt="#"/></figure>
+                           </div>
+                           <div class="trainer">
+                              <h3><%= trainings[i].name %></h3>
+                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                           </div>
+                        </div>
+                     </div>
+                 <% } %> 
+               </div>
+            </div>
+         </div>
     </div>
 <% } %>
 <% if(user.title == 'member') { %>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="profile-card">
                     <h2><%= user.name %> <%= user.surname %></h2>
                     <h3 style="text-transform: uppercase;"><%= user.title %></h3>

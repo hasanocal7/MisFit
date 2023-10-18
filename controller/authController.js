@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Training } = require('../models');
 const { query, validationResult } = require('express-validator');
 
 exports.createUser = async (req, res, next) => {
@@ -40,19 +40,21 @@ exports.logoutUser = (req, res) => {
 }
 
 exports.getDashboardPage = async (req, res) => {
-  const user = await User.findOne({where: { id: req.session.userID }})
+  const user = await User.findOne({where: { id: req.session.userID }});
   const users = await User.findAll();
+  const trainings = await Training.findAll({where: { trainer_id: req.session.userID }});
   res.status(200).render('dashboard', {
     page_name: 'dashboard',
     user,
     users,
+    trainings,
   });
 }
 
 exports.deleteUser = async (req, res) => {
   try {    
 
-    await User.destroy({where: {id: req.params.id}})
+    await User.destroy({where: {trainer_id: req.params.id}})
 
     res.status(200).redirect('/users/dashboard');
 
