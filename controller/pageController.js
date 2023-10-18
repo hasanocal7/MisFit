@@ -1,3 +1,5 @@
+const { User, Training } = require('../models');
+
 exports.getHomePage = (req, res) => {
     res.render('index', {
         page_name: 'home'
@@ -10,9 +12,14 @@ exports.getAboutPage = (req, res) => {
     });
 };
 
-exports.getTrainerPage = (req, res) => {
+exports.getTrainerPage = async (req, res) => {
+    const trainers = await User.findAll({where: {title: 'trainer'}});
+    const trainings = await Training.findAll({where: { trainer_id: 3 }});
+    console.log(trainings)
     res.render('trainer', {
-        page_name: 'trainer'
+        page_name: 'trainer',
+        trainers,
+        trainings
     });
 }
 

@@ -23,39 +23,39 @@
                </div>
             </div>
             <div class="row">
-               <div class="col-md-4">
-                  <div id="trai" class="trainer_box">
-                     <div class="trainer_img">
-                        <figure><img src="images/tra.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="trainer">
-                        <h3>sandy Mark </h3>
-                        <p>architecture</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div id="trai" class="trainer_box">
-                     <div class="trainer_img">
-                        <figure><img src="images/tra0.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="trainer">
-                        <h3>limijack </h3>
-                        <p>Maping</p>
+               <% for(let i=0; i < trainers.length; i++) { %>
+                  <div class="col-md-4">
+                     <div id="trai" class="trainer_box">
+                        <div class="trainer_img">
+                           <button type="button" data-toggle="modal" data-target="#Trainer<%= trainers[i].id %>">
+                           <figure><img src="https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg" alt="#"/></figure>
+                           </button>
+                        </div>
+                        <div class="trainer">
+                           <h3><%= trainers[i].name %> <%= trainers[i].surname %></h3>
+                           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
                      </div>
                   </div>
-               </div>
-               <div class="col-md-4">
-                  <div id="trai" class="trainer_box">
-                     <div class="trainer_img">
-                        <figure><img src="images/tra1.jpg" alt="#"/></figure>
+                  <!-- Trainer Profile pop-up -->
+                  <div class="modal fade" id="Trainer<%= trainers[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                     <div class="modal-dialog modal-dialog-centered" role="document">
+                       <div class="modal-content">
+                         <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLongTitle">Add Training Page</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                           </button>
+                         </div>
+                         <div class="modal-body">
+                             <div class="alert alert-danger" role="alert">
+                                 Kayıt Sınırını Aştın
+                             </div>
+                         </div>
+                       </div>
                      </div>
-                     <div class="trainer">
-                        <h3>smith den </h3>
-                        <p>Metarial</p>
-                     </div>
-                  </div>
-               </div>
+                   </div>
+               <% } %>
             </div>
          </div>
       </div>
