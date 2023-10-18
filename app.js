@@ -21,6 +21,7 @@ const db = require('./models');
 // ROUTE MODULES
 const pageRoute = require('./routes/pageRoute');
 const userRoute = require('./routes/userRoute');
+const trainingRoute = require('./routes/trainingRoute');
 
 // APPLICATION
 const app = express();
@@ -53,6 +54,7 @@ app.use('*', (req, res, next) => {
 });
 app.use('/', pageRoute);
 app.use('/users', userRoute);
+app.use('/trainings', trainingRoute);
 
 // SERVER CONNECTION ON PORT
 const PORT = process.env.PORT || 3000;

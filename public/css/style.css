@@ -793,6 +793,11 @@ button {
      opacity: 1;
 }
 
+.profile-card {
+     width: 300px;
+     padding: 20px;
+     text-align: center;
+ }
 
 /** end contact section **/
 
