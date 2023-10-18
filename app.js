@@ -4,9 +4,16 @@ const express = require('express');
 // MIDDLEWARE MODULES
 const cors = require('cors');
 const methodOverride = require('method-override');
-const session = require('express-session');
-const store = new session.MemoryStore();
 const bodyParser = require('body-parser');
+
+// SESSION MODULES
+const RedisStore = require("connect-redis").default
+const session = require("express-session");
+const {createClient} = require("redis");
+
+// Initialize client.
+const redisClient = createClient()
+redisClient.connect().catch(console.error)
 
 // DB
 const db = require('./models');
@@ -22,16 +29,16 @@ const app = express();
 app.set('view engine', 'ejs');
 
 // MIDDLEWARES
-app.use(cors())
-app.use(express.static('public'))
+app.use(cors());
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
     session({
-    secret: 'my_keyboard_cat',
-    resave: false,
-    saveUninitialized: true,
-    store
+        secret: 'my_keyboard_cat',
+        resave: false,
+        saveUninitialized: false,
+        store: new RedisStore({client: redisClient}),
     })
 );
 app.use(methodOverride('_method'));

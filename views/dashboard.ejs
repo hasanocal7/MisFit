@@ -1,13 +1,58 @@
 <%- include('partials/_header') %>
 <%- include('partials/_navigation') %>
+<% if(user.title == 'trainer') { %>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <% if(user.title == 'Trainer') { %>
-                    <div>Hi Trainer <%= user.name %> <%= user.surname %></div>
-                <% } %>
+                <div>Hi Trainer <%= user.name %> <%= user.surname %></div>
             </div>
         </div>
     </div>
-</div>
+<% } %>
+<% if(user.title == 'member') { %>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div>Hi Trainer <%= user.name %> <%= user.surname %></div>
+            </div>
+        </div>
+    </div>
+<% } %>
+<% if(user.title == 'admin') { %>
+    <div class="container">
+        <div class="row mt-5">
+            <h2>Users</h2>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">FULL NAME</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">PASSWORD</th>
+                    <th scope="col">TITLE</th>
+                    <th scope="col">DELETE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for (let i=0; i< users.length; i++) { %>
+                        <tr>
+                        <th scope="row"><%=users[i].id %></th>
+                        <td><%=users[i].name %> <%=users[i].surname %></td>
+                        <td><%=users[i].email %></td>
+                        <td><%=users[i].password %></td>
+                        <td><%=users[i].title %></td>
+                        <% if (users[i].title !== 'admin') { %>
+                        <td>
+                            <form method="POST" action="/users/<%=users[i].id %>?_method=DELETE">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                        <% } %>
+                    </tr>
+                    <% } %>
+                </tbody>
+              </table>
+        </div><!-- end row -->
+    </div>
+<% } %>
 <%- include('partials/_footer') %>
