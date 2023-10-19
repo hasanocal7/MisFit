@@ -28,5 +28,6 @@ const upload = multer({
 });
 
 router.post('/', upload.single('image'), trainingController.createTraining);
+router.delete('/:id', trainingController.deleteTraining);
 
 module.exports = router;

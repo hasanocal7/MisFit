@@ -25,3 +25,18 @@ exports.createTraining = async (req, res) => {
         return res.status(500).send('Bir hata oluştu');
       }
 }
+
+exports.deleteTraining = async (req, res) => {
+  try {    
+
+    await Training.destroy({where: {id: req.params.id}})
+
+    res.status(200).redirect('/users/dashboard');
+
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
+    });
+  }
+}
