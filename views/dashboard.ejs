@@ -19,6 +19,10 @@
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteTraining">
                         Delete Training
                     </button></div>
+                    <div class="btn-item" style="padding-top: 10px;">
+                      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateTraining">
+                        Update Training
+                    </button></div>
                 </div>
             </div>
                 <!-- Add Training Modal -->
@@ -72,6 +76,7 @@
                         </div>
                       </div>
                 <% } %>
+                <!-- Delete Training pop-up -->
                 <div class="modal fade" id="deleteTraining" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -105,12 +110,75 @@
                                     <% } %>
                                 </tbody>
                               </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Update Training pop-up -->
+                <div class="modal fade" id="updateTraining" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">My Trainings</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#ID</th>
+                                    <th scope="col">FULL NAME</th>
+                                    <th scope="col">DELETE</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (let i=0; i< trainings.length; i++) { %>
+                                        <tr>
+                                        <th scope="row"><%=trainings[i].id %></th>
+                                        <td><%=trainings[i].name %></td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#thisTraining<%=trainings[i].id %>">Update</button>
+                                        </td>
+                                        </tr>
+                                        <div class="modal fade" id="thisTraining<%=trainings[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                          <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Update Training Page</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                <form action="/trainings/<%=trainings[i].id %>?_method=PUT" method="POST" class="main_form" enctype="multipart/form-data">
+                                                  <div class="row">
+                                                      <div class="col-md-12 ">
+                                                         <input class="contactus" value="<%=trainings[i].name %>" type="type" name="name" required> 
+                                                      </div>
+                                                      <div class="col-md-12">
+                                                          <input class="contactus" value="<%=trainings[i].image %>" type="file" name="image" required> 
+                                                       </div>
+                                                      <div class="col-md-12">
+                                                         <button class="send_btn">UPDATE</button>
+                                                      </div>
+                                                   </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <% } %>
+                                </tbody>
+                              </table>
                         </div><!-- end row -->
                       </div>
                     </div>
                   </div>
                 </div>
-
             </div>
         </div>
         <div  class="trainers">
