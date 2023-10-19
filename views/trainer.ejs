@@ -1,7 +1,7 @@
 <%- include('partials/_header') %>
 <%- include('partials/_navigation') %>
 
-        <div class="back_re">
+      <div class="back_re">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -17,45 +17,55 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <div class="titlepage">
-                     <p>Lorem Ipsum available, but the majority have suffered </p>
-                  </div>
                </div>
-            </div>
-            <div class="row">
-               <% for(let i=0; i < trainers.length; i++) { %>
-                  <div class="col-md-4">
-                     <div id="trai" class="trainer_box">
-                        <div class="trainer_img">
-                           <button type="button" data-toggle="modal" data-target="#Trainer<%= trainers[i].id %>">
-                           <figure><img src="https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg" alt="#"/></figure>
-                           </button>
-                        </div>
-                        <div class="trainer">
-                           <h3><%= trainers[i].name %> <%= trainers[i].surname %></h3>
-                           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                  <% for(let i=0; i < trainers.length; i++) { %>
+                     <div class="col-md-4">
+                        <div id="trai" class="trainer_box">
+                           <div class="trainer_img">
+                              <button type="button" data-toggle="modal" data-target="#Trainer<%= trainers[i].id %>">
+                              <figure><img src="https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg" alt="#"/></figure>
+                              </button>
+                           </div>
+                           <div class="trainer">
+                              <h3><%= trainers[i].name %> <%= trainers[i].surname %></h3>
+                           </div>
                         </div>
                      </div>
-                  </div>
-                  <!-- Trainer Profile pop-up -->
-                  <div class="modal fade" id="Trainer<%= trainers[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                     <div class="modal-dialog modal-dialog-centered" role="document">
-                       <div class="modal-content">
-                         <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalLongTitle">Add Training Page</h5>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                             <span aria-hidden="true">&times;</span>
-                           </button>
-                         </div>
-                         <div class="modal-body">
-                             <div class="alert alert-danger" role="alert">
-                                 Kayıt Sınırını Aştın
+                     <!-- Trainer Profile pop-up -->
+                     <div class="modal fade" id="Trainer<%= trainers[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Trainings of the Trainer</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
                              </div>
-                         </div>
-                       </div>
+                             <div class="modal-body text-center">
+                              <div class="profile-card" style="text-align: left;">
+                                 <h2 class="profile-card-title"><%= trainers[i].name %> <%= trainers[i].surname %></h2>
+                                 <p>Contact: <%= trainers[i].email %></p>
+                                 <hr>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <% for(let j=0; j < trainings.length; j++) { %>
+                                       <% if(trainers[i].id === trainings[j].trainer_id) { %>
+                                          <figure class="img-container">
+                                             <img src="<%= trainings[j].image %>" alt="#" />
+                                             <figcaption class="caption">
+                                                <div class="training_name"><h3><%= trainings[j].name %></h3></div>
+                                             </figcaption>
+                                          </figure>
+                                       <% } %> 
+                                    <% } %>
+                                 </div>
+                              </div>
+                           </div>                                           
+                            </div>
+                          </div>
                      </div>
-                   </div>
-               <% } %>
+                  <% } %>
+               </div>
+               
             </div>
          </div>
       </div>

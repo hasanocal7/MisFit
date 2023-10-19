@@ -14,8 +14,7 @@ exports.getAboutPage = (req, res) => {
 
 exports.getTrainerPage = async (req, res) => {
     const trainers = await User.findAll({where: {title: 'trainer'}});
-    const trainings = await Training.findAll({where: { trainer_id: 3 }});
-    console.log(trainings)
+    const trainings = await Training.findAll();
     res.render('trainer', {
         page_name: 'trainer',
         trainers,
