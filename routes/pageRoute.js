@@ -9,5 +9,6 @@ router.get('/gallery', pageController.getGalleryPage);
 router.get('/contact', pageController.getContacPage);
 router.get('/login', redirectMiddleware, pageController.getLoginPage);
 router.get('/register', redirectMiddleware,  pageController.getRegisterPage);
+router.post('/sendmail', pageController.sendMail);
 
 module.exports = router;

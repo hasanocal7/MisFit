@@ -46,7 +46,7 @@
                                        <input class="contactus" value="<%= user.name %> <%= user.surname %>" type="text" name="trainer"> 
                                     </div>
                                     <div class="col-md-12">
-                                        <input class="contactus" type="file" name="image" required> 
+                                        <input type="file" name="image" required> 
                                      </div>
                                     <div class="col-md-12">
                                        <button class="send_btn">Add</button>
@@ -141,10 +141,10 @@
                                         <th scope="row"><%=trainings[i].id %></th>
                                         <td><%=trainings[i].name %></td>
                                         <td>
-                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#thisTraining<%=trainings[i].id %>">Update</button>
+                                            <a class="btn btn-warning" data-toggle="modal" href="#thisTraining<%=trainings[i].id %>">Update</a>
                                         </td>
                                         </tr>
-                                        <div class="modal fade" id="thisTraining<%=trainings[i].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal fade" id="thisTraining<%=trainings[i].id %>">
                                           <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                               <div class="modal-header">
@@ -154,18 +154,18 @@
                                                 </button>
                                               </div>
                                               <div class="modal-body">
-                                                <form action="/trainings/<%=trainings[i].id %>?_method=PUT" method="POST" class="main_form" enctype="multipart/form-data">
-                                                  <div class="row">
-                                                      <div class="col-md-12 ">
-                                                         <input class="contactus" value="<%=trainings[i].name %>" type="type" name="name" required> 
-                                                      </div>
-                                                      <div class="col-md-12">
-                                                          <input class="contactus" value="<%=trainings[i].image %>" type="file" name="image" required> 
-                                                       </div>
-                                                      <div class="col-md-12">
-                                                         <button class="send_btn">UPDATE</button>
-                                                      </div>
-                                                   </div>
+                                                <form action="/trainings/<%=trainings[i].id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                                                  <div class="form-group">
+                                                    <div class="col-md-12">
+                                                       <input class="form-control" value="<%=trainings[i].name %>" type="type" name="name"> 
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <input class="form-control-file mt-3" type="file" name="image" required> 
+                                                     </div>
+                                                    <div class="col-md-12">
+                                                       <button class="btn btn-warning mt-3">Update</button>
+                                                    </div>
+                                                 </div>
                                                 </form>
                                               </div>
                                             </div>

@@ -1,5 +1,6 @@
 // MODULES
 const express = require('express');
+require('dotenv').config();
 
 // MIDDLEWARE MODULES
 const cors = require('cors');
